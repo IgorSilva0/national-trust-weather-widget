@@ -1,5 +1,6 @@
 (function() {
-    // extract coordinates from URL
+    // Extract coordinates from URL
+    // This was done just to prevent using the same coodinates for every property
     const extractCoordinates = () => {
         const property = document.querySelector('#propertyViewOnGoogleMaps_image').href;
         const coordinates = property.split('destination=')[1];
