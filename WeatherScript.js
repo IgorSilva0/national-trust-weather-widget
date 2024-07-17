@@ -27,7 +27,7 @@
         // Weather title
         const weatherTitle = document.createElement('h4');
         weatherTitle.textContent = 'Current weather conditions:';
-        weatherTitle.style.margin = '10px 0';
+        weatherTitle.style.margin = '0 0 10px 0';
         weatherDisplay.appendChild(weatherTitle);
 
         // Weather information
