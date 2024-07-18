@@ -144,6 +144,7 @@
                             const weatherButton = document.createElement('button');
                             weatherButton.textContent = 'View Current Weather';
                             weatherButton.id = 'weatherButton';
+                            weatherButton.style.margin = '0 0 10px 0';
                             weatherButton.addEventListener('click', trackWeatherButtonClick);
                             parent.appendChild(weatherButton);
                         })
