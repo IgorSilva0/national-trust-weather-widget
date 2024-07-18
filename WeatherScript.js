@@ -1,13 +1,15 @@
 (function () {
 
+    // Function to randomly decide whether to show Version A or Version B
+    const shouldShowWeatherWidget = () => {
+        return Math.random() < 0.5; // 50% chance of showing weather widget
+    };
+
     // Solution One
     // Fetch data about location from national trust api
     const fetchCoordinates = async () => {
         try {
-            // Get URL from Session Storage 
-            const url = sessionStorage.getItem("qm_last_page")
-            // Get currrent URL of Browser
-            //const url = window.location.href;
+            const url = sessionStorage.getItem("qm_last_page");
             const parts = url.split('/visit/');
 
             if (parts.length > 1) {
@@ -20,10 +22,10 @@
 
                 const data = await response.json();
                 const location = data.pageProps.appContext.place.data.location.latitudeLongitude;
-                const lat = location.latitude
-                const lon = location.longitude
+                const lat = location.latitude;
+                const lon = location.longitude;
 
-                return { lat, lon }
+                return { lat, lon };
             } else {
                 console.log("Invalid URL format");
                 return null; // Return null or handle invalid format case
@@ -75,7 +77,9 @@
     // Function to create weather display elements
     const createWeatherDisplay = (temperature, clouds) => {
         const weatherDisplay = document.createElement('div');
+        weatherDisplay.classList.add('weather-widget');
         weatherDisplay.style.marginBottom = '10px';
+        weatherDisplay.style.display = 'none';
 
         // Weather title
         const weatherTitle = document.createElement('h4');
@@ -92,33 +96,63 @@
         return weatherDisplay;
     };
 
+    // Function to toggle weather display
+    const toggleWeatherDisplay = () => {
+        const weatherWidget = document.querySelector('.weather-widget');
+        if (weatherWidget.style.display === 'none' || !weatherWidget.style.display) {
+            weatherWidget.style.display = 'block';
+        } else {
+            weatherWidget.style.display = 'none';
+        }
+    };
+
+    // Event listener for weather view button click
+    const trackWeatherButtonClick = () => {
+        console.log('Weather button clicked');
+        // Replace with actual analytics tracking code if available
+        // For example: analytics.track('WeatherButtonClicked');
+        toggleWeatherDisplay(); // Show weather widget info
+        document.querySelector('#weatherButton').style.display = 'none'; // Hide the button after click
+    };
+
+    // Start widget
     const initialize = async () => {
         try {
-            //Solution One
-            const { lat, lon } = await fetchCoordinates();
+            if (shouldShowWeatherWidget()) {
+                //Solution One
+                const { lat, lon } = await fetchCoordinates();
 
-            //Solution Two
-            //const [lat, lon] = extractCoordinates();
+                //Solution Two
+                //const [lat, lon] = extractCoordinates();
 
-            //Solution Three
-            //const { lat, lon } = extractCoords();
+                //Solution Three
+                //const { lat, lon } = extractCoords();
 
-            // Check if weather display already exists on the page
-            const existingWeatherDisplay = document.querySelector('.weather-display');
+                // Check if weather display already exists on the page
+                const existingWeatherDisplay = document.querySelector('.weather-widget');
 
-            if (!existingWeatherDisplay) {
-                fetchWeatherData(lat, lon)
-                    .then(({ main, weather }) => {
-                        const temperature = main.temp;
-                        const clouds = weather[0].description.charAt(0).toUpperCase() + weather[0].description.slice(1);
-                        const parent = document.querySelector('[data-testid="place-summary-links"]');
-                        const weatherDisplay = createWeatherDisplay(temperature, clouds);
-                        weatherDisplay.classList.add('weather-display'); // Add a class for identification
-                        parent.appendChild(weatherDisplay);
-                    })
-                    .catch(error => console.error('Error:', error));
+                if (!existingWeatherDisplay) {
+                    fetchWeatherData(lat, lon)
+                        .then(({ main, weather }) => {
+                            const temperature = main.temp;
+                            const clouds = weather[0].description.charAt(0).toUpperCase() + weather[0].description.slice(1);
+                            const parent = document.querySelector('[data-testid="place-summary-links"]');
+                            const weatherDisplay = createWeatherDisplay(temperature, clouds);
+                            parent.appendChild(weatherDisplay);
+
+                            // Add weather view button
+                            const weatherButton = document.createElement('button');
+                            weatherButton.textContent = 'View Current Weather';
+                            weatherButton.id = 'weatherButton';
+                            weatherButton.addEventListener('click', trackWeatherButtonClick);
+                            parent.appendChild(weatherButton);
+                        })
+                        .catch(error => console.error('Error:', error));
+                } else {
+                    console.log('Weather display already exists. Not adding a new one.');
+                }
             } else {
-                console.log('Weather display already exists. Not adding a new one.');
+                console.log('Version B: Normal site without weather widget.');
             }
         } catch (error) {
             console.error('Error:', error);
