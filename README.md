@@ -10,7 +10,7 @@ The National Trust aims to enrich their property information pages with current 
 
 ### Coordinate Extraction and Weather Data Fetching
 
-- **Fetch Coordinates**:
+- **Fetch Coordinates Options**:
   - Extracts property coordinates from the National Trust API, HTML elements linking to Google Maps, or embedded JSON on the page.
   
 - **Fetch Weather Data**:
