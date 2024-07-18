@@ -4,13 +4,10 @@
     // Fetch data about location from national trust api
     const fetchCoordinates = async () => {
         try {
-
             // Get URL from Session Storage 
             const url = sessionStorage.getItem("qm_last_page")
-
             // Get currrent URL of Browser
             //const url = window.location.href;
-
             const parts = url.split('/visit/');
 
             if (parts.length > 1) {
@@ -106,7 +103,7 @@
             //Solution Three
             //const { lat, lon } = extractCoords();
 
-            // Check if weather display already exists on the page (to avoid duplicate)
+            // Check if weather display already exists on the page
             const existingWeatherDisplay = document.querySelector('.weather-display');
 
             if (!existingWeatherDisplay) {
