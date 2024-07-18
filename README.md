@@ -138,6 +138,34 @@ const extractCoords = () => {
 
 This choice optimizes performance and reliability, making it suitable for integrating into the National Trust website without introducing unnecessary complexity or potential points of failure.
 
+## A/B Test: Weather Widget Impact on National Trust Property Pages
+
+**Overview:**
+This A/B test examines how adding a weather widget to National Trust property pages affects visitor engagement and user experience. Here's what we're exploring:
+
+**Version A (With Weather Widget):**
+Visitors in this group will see a weather widget showing real-time weather conditions for the property. The widget remains hidden until users click a button labeled "View Current Weather."
+
+**Version B (Without Weather Widget):**
+Visitors in this group will experience the National Trust property pages without any weather information displayed.
+
+**Objective:**
+Our goal is to understand if providing weather information directly on the property pages influences how visitors interact with the site and potentially increases their interest in visiting National Trust properties.
+
+**Implementation Details:**
+- **Random Assignment:** Visitors are randomly assigned to either Version A or Version B to ensure fairness and unbiased results.
+- **Widget Activation:** In Version A, users must actively click to view the weather, allowing us to track user interest in this feature.
+- **Tracking Metrics:** We'll measure metrics such as button clicks to view the weather, overall time spent on the page, and any changes in visitor behavior (like returning to the page or exploring further).
+
+**Expected Outcomes:**
+- **Version A (With Widget):** We anticipate that providing weather information will enhance user engagement and potentially encourage more visits by helping users plan their trips better.
+- **Version B (Without Widget):** This serves as our control group to compare against, helping us understand the baseline user interaction without the weather feature.
+
+**Conclusion:**
+Through this A/B test, we aim to gather insights that will guide us in enhancing user experience on National Trust property pages. By providing valuable information like current weather conditions, we strive to better meet the needs of our visitors and improve their overall journey when exploring our properties.
+
+This test reflects our commitment to continuously improving our online services and ensuring that visitors have access to useful information that enhances their National Trust experience.
+
 ## Future Plans for Expansion
 
 The National Trust Weather Display Widget is planned to evolve with enhanced features:
